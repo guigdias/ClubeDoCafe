@@ -23,7 +23,7 @@ export function createUsuario(): Tarefa
     datanascimento: new Date(),
     email: '',
     senha: '',
-    celular: "999999999",
+    celular: "",
     cpf: '',
     cep: "0",
     endereco: '',
