@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
 import { ServicosComponent } from './servicos/servicos.component';
+import {UsuariosListComponent} from './usuario-list/usuario-list.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redireciona a rota base para /home
@@ -12,4 +13,5 @@ export const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent }, // Rota para Cadastro
   { path: 'sobre-nos', component: SobreNosComponent },
   { path: 'servicos', component: ServicosComponent },
+  { path: 'usuario-list', component: UsuariosListComponent }
 ];

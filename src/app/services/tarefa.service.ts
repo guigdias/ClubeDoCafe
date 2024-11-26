@@ -23,9 +23,15 @@ export class TarefaService {
   private ultimoUsuario: Tarefa | null = null;
 
   cadastrar(usuario: Tarefa) {
+    usuario.id = (Math.random() * 10000).toFixed(0);
     this.usuarios.push(usuario);
     this.ultimoUsuario = usuario;
   }
+
+  getUsuarios(): Tarefa[] {
+    return this.usuarios;
+  }
+
 
   getUltimoUsuario(): Tarefa | null {
     return this.ultimoUsuario;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Celular</th>
+      <th>CPF</th>
+      <th>Endereço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.nome }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.celular }}</td>
+      <td>{{ usuario.cpf }}</td>
+      <td>{{ usuario.endereco }}</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
