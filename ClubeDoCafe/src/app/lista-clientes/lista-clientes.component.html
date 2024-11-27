@@ -1,0 +1,30 @@
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Lista de Clientes</h1>
+    </div>
+    <div class="table">
+      <!-- Cabeçalho da tabela -->
+      <div class="table-header">
+        <span>ID</span>
+        <span>Nome</span>
+        <span>Cidade</span>
+        <span>E-mail</span>
+        <span>Telefone</span>
+        <span>Endereço</span>
+        <span>Ação</span>
+      </div>
+
+      <!-- Linhas de dados -->
+      <div class="table-row" *ngFor="let usuario of usuarios">
+        <span>{{ usuario.id || '' }}</span>
+        <span>{{ usuario.nome || '' }}</span>
+        <span>{{ usuario.cidade || '' }}</span>
+        <span>{{ usuario.email || '' }}</span>
+        <span>{{ usuario.telefone || '' }}</span>
+        <span>{{ usuario.endereco || '' }}</span>
+        <button class="detalhe-button" [routerLink]="['/usuario', usuario.id]">Detalhes</button>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,70 @@
+body {
+  width: 1260px;
+  height: 93vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E0CFCF;
+  font-family: 'Afacad', sans-serif;
+}
+
+.container {
+  background-color: #E0CFCF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Retângulo com bordas arredondadas */
+.rectangle {
+  display: flex;
+  width: 1160px;
+  height: 670px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: white; /* Fundo branco */
+  margin: 0;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para a seção da imagem */
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta para preencher sem distorção */
+}
+
+/* Estilo para a seção do texto */
+.text-section {
+  width: 60%; /* Metade do retângulo */
+  padding: 40px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.text-section .title {
+  color: #E57070;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Afacad', sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.text-section .content {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #4F3E3E;
+  margin: 0 0 15px 0; /* Espaço entre os parágrafos */
+}

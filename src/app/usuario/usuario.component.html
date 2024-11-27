@@ -1,0 +1,37 @@
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{ usuario.nome }}</h1> <!-- Nome do usuário como título -->
+    </div>
+
+    <!-- Seção de Dados Pessoais -->
+    <div class="section" [ngClass]="'dados-pessoais'">
+      <h2>Dados Pessoais</h2>
+      <div class="info">
+        <p><strong>Nome:</strong> {{ usuario.nome }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ usuario.datanascimento }}</p>
+        <p><strong>E-mail:</strong> {{ usuario.email }}</p>
+        <p><strong>Celular:</strong> {{ usuario.telefone }}</p>
+        <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
+        <p><strong>Genero:</strong> {{ usuario.genero }}</p>
+      </div>
+    </div>
+
+    <!-- Seção de Endereço -->
+    <div class="section" [ngClass]="'endereco'">
+      <h2>Endereço</h2>
+      <div class="info">
+        <p><strong>CEP:</strong> {{ usuario.cep }}</p>
+        <p><strong>Endereço:</strong> {{ usuario.endereco }}, {{ usuario.numero }} - {{ usuario.complemento }}</p>
+        <p><strong>Bairro:</strong> {{ usuario.bairro }}</p>
+        <p><strong>Cidade:</strong> {{ usuario.cidade }}</p>
+        <p><strong>UF:</strong> {{ usuario.uf }}</p>
+      </div>
+    </div>
+
+    <div class="usuario-botoes">
+      <button class="botao-editar" (click)="editarUsuario(usuario.id)">Editar</button>
+      <button class="botao-deletar" (click)="deletarUsuario(usuario.id)">Deletar</button>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,32 @@
+<header>
+  <!-- Imagem superior -->
+  <div class="header-top">
+    <img src="header.png" alt="Imagem do topo" class="header-image">
+  </div>
+
+  <!-- Menu -->
+  <nav class="menu">
+    <!-- Região 1: Logo -->
+    <div class="menu-left">
+      <a href="/home">
+        <img src="logo.png" alt="Logo" class="menu-logo">
+      </a>
+    </div>
+
+    <!-- Região 2: Links -->
+    <div class="menu-center">
+      <ul class="menu-links">
+        <li><a routerLink="/sobre-nos">Sobre nós</a></li>
+        <li><a routerLink="/servicos">Serviços</a></li>
+        <li><a [routerLink]="['/home']" fragment="contato">Contato</a></li>
+        <li><a [routerLink]="['/lista-clientes']">Clientes</a></li>
+      </ul>
+    </div>
+
+    <!-- Região 3: Botão de Entrar -->
+    <div class="menu-right">
+      <img src="img_entrar.png" alt="Ícone de login" class="login-icon">
+      <button class="btn-login" routerLink="/login">Entrar</button>
+    </div>
+  </nav>
+</header>

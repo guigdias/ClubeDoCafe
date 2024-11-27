@@ -1,0 +1,44 @@
+<body>
+  <div class="container">
+    <div class="rectangle">
+      <!-- Região esquerda -->
+      <div class="left-section">
+        <!-- Região 1: Título e texto -->
+        <div class="top-left">
+          <h2>Bem-vindo(a) de volta!</h2>
+          <p>Para se manter conectado conosco, faça o login com as suas informações pessoais.</p>
+        </div>
+
+        <!-- Região 2: Imagem -->
+        <div class="bottom-left">
+          <img src="img-login.png" alt="Imagem da região inferior esquerda">
+        </div>
+      </div>
+
+      <!-- Região direita -->
+      <div class="right-section">
+        <h1>Login</h1>
+        <img src="linha-login.png" alt="Imagem da seção direita">
+
+        <!-- Formulário -->
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" placeholder="Digite seu e-mail" [(ngModel)]="email">
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" placeholder="Digite sua senha" [(ngModel)]="senha">
+        </div>
+
+        <div class="hover">
+          <button class="btn" (click)="login()">Entrar</button>
+        </div>
+
+        <div class="signup">
+          <p>Ainda não tem conta? <a href="/cadastro">Cadastre-se!</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
