@@ -11,17 +11,17 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  cpf: string = '';
+  email: string = '';
   senha: string = '';
 
   constructor(private tarefaService: TarefaService, private router: Router) {}
 
   login() {
-    if (this.tarefaService.login(this.cpf, this.senha)) {
+    if (this.tarefaService.login(this.email, this.senha)) {
       alert('Login realizado com sucesso!');
       this.router.navigate(['/']);
     } else {
-      alert('CPF ou senha inválidos.');
+      alert('Email ou senha inválidos.');
     }
   }
 }

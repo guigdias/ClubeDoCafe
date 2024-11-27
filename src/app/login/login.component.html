@@ -1,12 +1,3 @@
-<!-- <div class="container">
-  <h2>Login</h2>
-  <form (ngSubmit)="login()">
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-    <input type="password" [(ngModel)]="senha" name="senha" placeholder="Senha" required />
-    <button type="submit">Entrar</button>
-  </form>
-</div> -->
-
 <body>
   <div class="container">
     <div class="rectangle">
@@ -31,13 +22,13 @@
 
         <!-- Formulário -->
         <div class="form-group">
-          <label for="cpf">CPF:</label>
-          <input type="cpf" id="cpf" placeholder="Digite seu e-mail" [(ngModel)]="cpf" >
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" placeholder="Digite seu e-mail" [(ngModel)]="email">
         </div>
 
         <div class="form-group">
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" placeholder="Digite sua senha"  [(ngModel)]="senha">
+          <input type="password" id="senha" placeholder="Digite sua senha" [(ngModel)]="senha">
         </div>
 
         <div class="hover">

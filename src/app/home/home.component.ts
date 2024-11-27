@@ -10,7 +10,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  mensagemBemVindo!: void;
+  mensagemBemVindo: string = '';
 
   constructor(
     private tarefaService: TarefaService,
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     const ultimoUsuario = this.tarefaService.getUltimoUsuario();
     if (ultimoUsuario) {
-      this.mensagemBemVindo = alert(`Bem-vindo, ${ultimoUsuario.nome}!`);
+      this.mensagemBemVindo = `Bem-vindo, ${ultimoUsuario.nome}!`;
     }
 
     this.route.fragment.subscribe(fragment => {
