@@ -1,109 +1,51 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Tarefa } from '../models/tarefa.model';
-
 @Injectable({
   providedIn: 'root',
 })
 export class TarefaService {
-  private usuarios: Tarefa[] = [
-    {
-    id: "101325",
-    nome: 'Carlos Pereira',
-    datanascimento: new Date(),
-    email: 'carlos@email.com',
-    senha: '12345',
-    telefone: "(31) 98765-4321",
-    cpf: '19867034506',
-    cep: "31187023",
-    endereco: 'Praça da Liberdade',
-    bairro: 'Savassi',
-    numero: "789",
-    complemento: 'Casa',
-    cidade: 'Belo Horizonte',
-    uf: 'MG',
-    genero: 'Masculino'
-    },
-    {
-      id: "101326",
-      nome: 'João Santos',
-      datanascimento: new Date('1985-08-10'),
-      email: 'joao.santos@email.com',
-      senha: 'joao2023',
-      telefone: "(11) 91234-5678",
-      cpf: '45678901234',
-      cep: "01310100",
-      endereco: 'Rua Augusta',
-      bairro: 'Consolação',
-      numero: "150",
-      complemento: 'Escritório 12',
-      cidade: 'São Paulo',
-      uf: 'SP',
-      genero: 'Masculino'
-    },
-    {
-      id: "101327",
-      nome: 'Maria Oliveira',
-      datanascimento: new Date('1990-03-15'),
-      email: 'maria@email.com',
-      senha: 'senha123',
-      telefone: "(21) 99876-5432",
-      cpf: '34567890123',
-      cep: "22041010",
-      endereco: 'Av. Atlântica',
-      bairro: 'Copacabana',
-      numero: "456",
-      complemento: 'Apto 302',
-      cidade: 'Rio de Janeiro',
-      uf: 'RJ',
-      genero: 'Feminino'
-    }
-  ];
-  private ultimoUsuario: Tarefa | null = null;
+  private apiUrl = 'http://localhost:3000/usuarios';
 
-  cadastrar(usuario: Tarefa) {
-    usuario.id = (Math.random() * 110000).toFixed(0);
-    this.usuarios.push(usuario);
-    this.ultimoUsuario = usuario;
+  constructor(private http: HttpClient) {}
+
+  // Buscar todos os usuários
+  getUsuarios(): Observable<Tarefa[]> {
+    return this.http.get<Tarefa[]>(this.apiUrl);
   }
 
-  getUsuarios(): Tarefa[] {
-    return this.usuarios;
+  // Buscar um usuário pelo ID
+  getUsuarioById(id: string): Observable<Tarefa | null> {
+    return this.http.get<Tarefa | null>(`${this.apiUrl}/${id}`);
   }
 
-  getUltimoUsuario(): Tarefa | null {
-    return this.ultimoUsuario;
+  // Cadastrar um novo usuário
+  cadastrar(usuario: Tarefa): Observable<Tarefa> {
+    return this.http.post<Tarefa>(this.apiUrl, usuario);
   }
 
-  login(email: string, senha: string): boolean {
-    for(const usuario of this.usuarios)
-    {
-      if(usuario.email === email)
-      {
-        if(usuario.senha === senha)
-        {
-          this.ultimoUsuario = usuario;
-          return true;
-        }
-      }
-    }
-    return false
+  // Atualizar um usuário existente
+  atualizarUsuario(usuario: Tarefa): Observable<Tarefa> {
+    return this.http.put<Tarefa>(`${this.apiUrl}/${usuario.id}`, usuario);
   }
 
-  getUsuarioById(id: string): Tarefa | undefined {
-    return this.usuarios.find(usuario => usuario.id === id);
+  // Deletar um usuário pelo ID
+  deletarUsuario(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  deleteUsuario(id: string){
-    this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
-  }
+  // Método de login
+  login(email: string, senha: string): Observable<Tarefa | null> {
+    const params = new HttpParams().set('email', email).set('senha', senha); // Gerando os parâmetros da requisição
 
-  AtualizarUsuario(usuarioAtualizado: Tarefa)
-  {
-    const index = this.usuarios.findIndex(usuario => usuario.id === usuarioAtualizado.id);
-    if (index !== -1) {
-      this.usuarios[index] = usuarioAtualizado;
-    }
+    return this.http.get<Tarefa[]>(this.apiUrl, { params }).pipe(
+      map(usuarios => usuarios.length > 0 ? usuarios[0] : null), // Se houver usuários, retorna o primeiro; caso contrário, null
+      catchError(() => {
+        console.error('Erro ao realizar o login.');
+        return of(null); // Em caso de erro, retorna null
+      })
+    );
   }
 }
-
-

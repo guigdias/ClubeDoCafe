@@ -15,6 +15,7 @@ export interface Tarefa
   cidade: string;
   uf: string;
   genero: string;
+  tipousuario: string;
 }
 
 export function createUsuario(): Tarefa
@@ -34,6 +35,7 @@ export function createUsuario(): Tarefa
     complemento: '',
     cidade: '',
     uf: '',
-    genero: ''
+    genero: '',
+    tipousuario: 'comum'
   };
 }

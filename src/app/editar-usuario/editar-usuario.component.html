@@ -7,7 +7,7 @@
     </div>
 
     <!-- Formulário de Cadastro -->
-    <form class="form" (ngSubmit)="AtualizarUsuario()">
+    <form class="form" (ngSubmit)="atualizarUsuario()">
       <div class="personal-address">
         <!-- Dados Pessoais -->
         <section class="section dados-pessoais">
@@ -36,19 +36,19 @@
         <section class="section endereco">
           <h3>Endereço</h3>
           <div class="form-group">
-            <input type="text" id="rua" placeholder="Digite sua rua" [(ngModel)]="usuario.endereco" name="endereco">
+            <input type="text" id="rua" placeholder="Rua" [(ngModel)]="usuario.endereco" name="endereco" readonly>
           </div>
           <div class="form-row">
-            <input type="text" id="cep" placeholder="Digite seu CEP" [(ngModel)]="usuario.cep" name="cep">
+            <input type="text" id="cep" placeholder="Digite seu CEP" [(ngModel)]="usuario.cep" name="cep" (blur)="buscarCep()" required="">
             <input type="text" id="numero" placeholder="Número" [(ngModel)]="usuario.numero" name="numero">
           </div>
           <div class="form-row">
             <input type="text" id="complemento" placeholder="Complemento" [(ngModel)]="usuario.complemento" name="complemento">
-            <input type="text" id="bairro" placeholder="Bairro" [(ngModel)]="usuario.bairro" name="bairro">
+            <input type="text" id="bairro" placeholder="Bairro" [(ngModel)]="usuario.bairro" name="bairro" readonly>
           </div>
           <div class="form-row">
-            <input type="text" id="cidade" placeholder="Cidade" [(ngModel)]="usuario.cidade" name="cidade">
-            <input type="text" id="uf" placeholder="UF" [(ngModel)]="usuario.uf" name="uf">
+            <input type="text" id="cidade" placeholder="Cidade" [(ngModel)]="usuario.cidade" name="cidade" readonly>
+            <input type="text" id="uf" placeholder="UF" [(ngModel)]="usuario.uf" name="uf" readonly>
           </div>
         </section>
       </div>
@@ -63,7 +63,7 @@
 
       <!-- Botão de Submissão -->
       <div class="submit-section">
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Atualizar</button>
       </div>
     </form>
   </div>

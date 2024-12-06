@@ -13,16 +13,10 @@ export class HomeComponent implements OnInit {
   mensagemBemVindo: string = '';
 
   constructor(
-    private tarefaService: TarefaService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    const ultimoUsuario = this.tarefaService.getUltimoUsuario();
-    if (ultimoUsuario) {
-      this.mensagemBemVindo = `Bem-vindo, ${ultimoUsuario.nome}!`;
-    }
-
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
         const element = document.getElementById(fragment);

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TarefaService } from '../services/tarefa.service';
 import { Tarefa } from '../models/tarefa.model';
+import { CepService } from '../services/cep.service';
 
 @Component({
   selector: 'app-editar-usuario',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './editar-usuario.component.html',
-  styleUrl: './editar-usuario.component.css'
+  styleUrls: ['./editar-usuario.component.css'],
 })
 export class EditarUsuarioComponent implements OnInit {
-
   usuario: Tarefa = {
-    id: Math.floor(Math.random() * 110000).toString(),
+    id: '',
     nome: '',
-    datanascimento: new Date('dd/mm/yyyy'),
+    datanascimento: new Date(),
     email: '',
     senha: '',
     telefone: '',
@@ -29,37 +29,66 @@ export class EditarUsuarioComponent implements OnInit {
     complemento: '',
     cidade: '',
     uf: '',
-    genero: ''
+    genero: '',
+    tipousuario: ''
   };
-
-
-  definirGenero(genero: string)
-  {
-    this.usuario.genero;
-  }
-  genero = ['Masculino', 'Feminino', 'Outros'];
 
   constructor(
     private tarefaService: TarefaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cepService: CepService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.usuario = this.tarefaService.getUsuarioById(id) || this.usuario;
-    }
-
-    if (!this.usuario) {
-      this.router.navigate(['/not-found']);
+      this.tarefaService.getUsuarioById(id).subscribe(
+        (usuario) => {
+          if (usuario) {
+            this.usuario = usuario;
+          } else {
+            this.router.navigate(['/not-found']);
+          }
+        },
+        (error) => {
+          console.error('Erro ao buscar o usuário:', error);
+          this.router.navigate(['/not-found']);
+        }
+      );
     }
   }
 
-  AtualizarUsuario(){
-    if(this.usuario){
-      this.tarefaService.AtualizarUsuario(this.usuario);
-      this.router.navigate(['../lista-clientes']);
+  atualizarUsuario(): void {
+    this.tarefaService.atualizarUsuario(this.usuario).subscribe({
+      next: () => {
+        alert('Usuário atualizado com sucesso!');
+        this.router.navigate(['/lista-clientes']);
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar o usuário:', err);
+        alert('Erro ao atualizar o usuário. Tente novamente.');
+      },
+    });
+  }
+
+  buscarCep(): void {
+    if (this.usuario.cep) {
+      this.cepService.buscarCep(this.usuario.cep).subscribe({
+        next: (dados) => {
+          if (dados.logradouro) {
+            this.usuario.endereco = dados.logradouro;
+            this.usuario.bairro = dados.bairro;
+            this.usuario.cidade = dados.localidade;
+            this.usuario.uf = dados.uf;
+          } else {
+            alert('CEP não encontrado!');
+          }
+        },
+        error: () => {
+          alert('Erro ao buscar o CEP. Tente novamente.');
+        },
+      });
     }
   }
 }
